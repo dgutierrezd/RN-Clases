@@ -1,26 +1,27 @@
 import React from 'react';
 
-import {View, Text, StyleSheet} from 'react-native';
+import {Header} from 'react-native-elements';
 
-const Header = () => {
+const HeaderNav = ({navigation}) => {
   return (
-    <View style={styles.header}>
-      <Text style={styles.texto}>Mi primera App</Text>
-    </View>
+    <Header
+      leftComponent={{
+        icon: 'menu',
+        color: '#fff',
+        onPress: () => navigation.openDrawer(),
+      }}
+      centerComponent={{text: 'Mi primera App', style: {color: '#fff'}}}
+      rightComponent={{
+        icon: 'home',
+        color: '#fff',
+        onPress: () =>
+          navigation.navigate('Login', {
+            nombre: 'Daniel',
+            // pagina.com/user/Daniel
+          }),
+      }}
+    />
   );
 };
 
-const styles = StyleSheet.create({
-  header: {
-    backgroundColor: '#89ccf5',
-  },
-  texto: {
-    marginTop: 50,
-    justifyContent: 'center',
-    textAlign: 'center',
-    fontSize: 30,
-    color: '#ffffff',
-  },
-});
-
-export default Header;
+export default HeaderNav;

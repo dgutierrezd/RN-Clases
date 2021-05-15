@@ -1,40 +1,40 @@
 import React, {useState} from 'react';
 
 import {View, Text, StyleSheet, TextInput, Button, Alert} from 'react-native';
+import {Header} from 'react-native-elements';
+import HeaderNav from './Header';
 
-const Login = () => {
+const Login = ({navigation, route}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const showAlert = () => {
-    Alert.alert('Correo', email, [
-      {
-        text: 'Salir',
-        onPress: () => console.log('Alert cerrado'),
-        style: 'cancel',
-      },
-    ]);
+  const submitLogin = () => {
+    navigation.navigate('Users', {email});
   };
 
   return (
-    <View style={styles.login}>
-      <TextInput
-        onChangeText={e => setEmail(e)}
-        value={email}
-        style={styles.input}
-        placeholder="Email"
-        textContentType="emailAddress"
-        keyboardType="email-address"
-      />
-      <TextInput
-        onChangeText={e => setPassword(e)}
-        value={password}
-        style={styles.input}
-        placeholder="Contraseña"
-        secureTextEntry={true}
-      />
-      <View style={styles.button}>
-        <Button title="Enviar" onPress={() => showAlert()} />
+    <View>
+      <HeaderNav navigation={navigation} />
+      <View style={styles.login}>
+        <Text>{route.params.nombre}</Text>
+        <TextInput
+          onChangeText={e => setEmail(e)}
+          value={email}
+          style={styles.input}
+          placeholder="Email"
+          textContentType="emailAddress"
+          keyboardType="email-address"
+        />
+        <TextInput
+          onChangeText={e => setPassword(e)}
+          value={password}
+          style={styles.input}
+          placeholder="Contraseña"
+          secureTextEntry={true}
+        />
+        <View style={styles.button}>
+          <Button title="Enviar" onPress={() => submitLogin()} />
+        </View>
       </View>
     </View>
   );
